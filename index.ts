@@ -1,6 +1,5 @@
 import express from "express";
 import path from "path";
-import {name} from "./controllers/home_controller";
 import { engine } from 'express-handlebars';
 import fs from "fs";
 const DEBUG = process.env.NODE_ENV !== "production";
@@ -13,7 +12,6 @@ app.set('views', './views');
 
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.url}`)
-  console.log(name);
   next()
 });
 
