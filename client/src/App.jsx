@@ -9,9 +9,8 @@ function App() {
 
   async function getRandomNumber() {
     const res = await fetch("/random_number");
-    console.log(res);
     const body = await res.json();
-    console.log(body);
+    setRandomNumber(body.number);
   }
 
   useEffect(() => {
@@ -36,6 +35,7 @@ function App() {
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
+        <p>Random number: {randomNumber}</p>
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
