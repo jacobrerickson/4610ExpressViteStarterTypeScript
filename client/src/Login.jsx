@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useApi } from "./utils/use_api";
+import { setAuthToken } from "./store/application_slice";
+import { useDispatch } from "react-redux";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const api = useApi();
+  const dispatch = useDispatch()
 
   async function login(e) {
     e.preventDefault();
@@ -15,7 +18,7 @@ export const Login = () => {
       password,
     });
 
-    window.localStorage.setItem("jwt", token);
+    dispatch(setAuthToken(token));
     navigate("/")
   }
 
