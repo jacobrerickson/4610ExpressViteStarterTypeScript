@@ -2,7 +2,7 @@ import { Link, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function App() {
-  const authToken = useSelector(state => state.application.authToken)
+  const authToken = useSelector((state: ApplicationState) => state.application.authToken)
   return (
     <div>
       <nav className="my-nav"><h2>App Name</h2>{

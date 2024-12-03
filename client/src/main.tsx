@@ -1,13 +1,13 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
+import App from './App.js'
 import './index.css'
 import {createHashRouter, RouterProvider} from "react-router-dom";
 import {Provider, useSelector} from 'react-redux';
-import store from './store/store';
-import { Home } from './Home.jsx';
-import { Login } from './Login.jsx';
-import { SignUp } from './SignUp.jsx';
+import store from './store/store.js';
+import { Home } from './Home.js';
+import { Login } from './Login.js';
+import { SignUp } from './SignUp.js';
 import { Api, ApiContext } from './utils/api.js';
 
 const router = createHashRouter([
@@ -33,7 +33,7 @@ const router = createHashRouter([
 
 
 const Main = () => {
-  const authToken = useSelector(state => state.application.authToken)
+  const authToken = useSelector((state: ApplicationState) => state.application.authToken)
   const apiRef = useRef(new Api(authToken));
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const Main = () => {
   )
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById('root')!!).render(
   <Provider store={store}>
     <Main />
   </Provider>

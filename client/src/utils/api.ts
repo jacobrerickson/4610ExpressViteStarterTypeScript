@@ -1,14 +1,18 @@
 import { createContext } from "react";
 
-export class Api {
-  authToken = null;
+interface RequestOptions extends RequestInit {
+  body?: string;
+}
 
-  constructor(initialToken) {
+export class Api {
+  authToken: string | null;
+
+  constructor(initialToken: string | null) {
     this.authToken = initialToken
   }
 
-  async makeRequest(url, method, body) {
-    const options = {};
+  async makeRequest(url: string, method: string, body: object | null): Promise<any> {
+    const options: RequestOptions = {};
     if (method === 'POST' || method === 'PUT') {
       options.body = JSON.stringify(body);
     }
@@ -24,21 +28,21 @@ export class Api {
     return res.json();
   }
 
-  get(url) {
-    return this.makeRequest(url, 'GET');
+  get(url: string) {
+    return this.makeRequest(url, 'GET', null);
   }
 
-  post(url, body = {}) {
+  post(url: string, body = {}) {
     return this.makeRequest(url, 'POST', body);
   }
 
-  put(url, body = {}) {
+  put(url: string, body = {}) {
     return this.makeRequest(url, 'PUT', body);
   }
 
-  del(url) {
-    return this.makeRequest(url, 'DELETE');
+  del(url: string) {
+    return this.makeRequest(url, 'DELETE', null);
   }
 }
 
-export const ApiContext = createContext(new Api());
+export const ApiContext = createContext(new Api(null));
